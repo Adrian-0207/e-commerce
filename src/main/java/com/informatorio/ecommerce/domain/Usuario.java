@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -36,6 +38,9 @@ public class Usuario {
     private String provincia;
     @NotBlank
     private String pais;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Carrito> carritos = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -111,4 +116,17 @@ public class Usuario {
     public void setPais(String pais) {
         this.pais = pais;
     }
+/*
+    public void agregarCarrito(Carrito carrito) {
+        carritos.add(carrito);
+        carrito.setUsuario(this);
+    }
+
+ */
+/*
+    public List<Carrito> getCarritos() {
+        return carritos;
+    }
+    */
+
 }
